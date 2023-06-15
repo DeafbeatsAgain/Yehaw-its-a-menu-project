@@ -1,4 +1,7 @@
 import os
+import sys
+import time
+
 
 # File paths for storing character and settings data
 character_data_file = "character_data.txt"
@@ -27,21 +30,46 @@ def create_character():
         file.write(first_pet_name + "\n")
 
 def settings_menu():
-    # Add code for settings here
-    print("You think this game has settings?")
-    print("You can change the Flerp setting.")
-    flerp_level = input("Please enter the level of Flerp (1-10): ")
-    spicy_level = input("Enter your spiciness preference: ")
+    while True:
+        print("You think this game has settings?")
+        print("You can change the Flerp setting.")
+        flerp_level = input("Please enter the level of Flerp (1-10): ")
+        spicy_level = input("Enter your spiciness preference: ")
 
-    # Display the settings
-    print("Settings Summary:")
-    print("Flerp level:", flerp_level)
-    print("Spicy level:", spicy_level)
+        print("Settings Summary:")
+        print("Flerp level:", flerp_level)
+        print("Spicy level:", spicy_level)
 
-    # Save the settings
-    with open(settings_data_file, "w") as file:
-        file.write(flerp_level + "\n")
-        file.write(spicy_level + "\n")
+        user_input = input("Return to Main Menu? (yes/no): ")
+        if user_input.lower() == "yes":
+            return True  # Return a value indicating the user wants to go back to the main menu
+        elif user_input.lower() == "no":
+            print("Returning to Settings Menu...")
+            continue  # Continue to the next iteration of the loop to prompt the user again
+        else:
+            print("Invalid choice. Please try again.")
+
+
+while True:
+    print("Menu:")
+    print("1. Game")
+    print("2. Settings")
+    print("3. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        # Game logic here
+        pass
+    elif choice == "2":
+        print("You selected settings.")
+        if settings_menu():
+            continue  # Go back to the main menu
+    elif choice == "3":
+        print("Exiting the program...")
+        break
+    else:
+        print("Invalid choice. Please try again.")
 
 # Check if the character data file exists and load character data if available
 if os.path.exists(character_data_file):
@@ -102,7 +130,8 @@ while True:
 
     elif choice == "4":
         print("Exiting the program...")
-        break  # Exit the loop
+        # add code to close the program
+        break
 
     else:
         print("Invalid choice. Please try again.")
